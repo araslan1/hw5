@@ -1,6 +1,5 @@
 #ifndef RECCHECK
 #include <set>
-#include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -24,7 +23,7 @@ static const Worker_T INVALID_ID = (unsigned int)-1;
 
 bool solve(const AvailabilityMatrix& avail, const size_t dailyNeed, const size_t maxShifts, DailySchedule& sched, size_t row, size_t col); 
 bool isValid(DailySchedule& sched, size_t row, size_t col, size_t num_of_workers, const size_t maxShifts, size_t curr_col); 
-void printsched(DailySchedule& sched);
+// void printsched(DailySchedule& sched);
 // Add your implementation of schedule() and other helper functions here
 
 bool schedule(
@@ -101,6 +100,7 @@ bool solve(
 bool isValid(DailySchedule& sched, size_t row, size_t col, size_t num_of_workers, const size_t maxShifts, size_t curr_col){
     //check if maxshifts for each worker have been exceeded 
     vector<int> counter(num_of_workers, 0); 
+    int curr_id = sched[row][curr_col]; 
     for (size_t i = 0; i <= row; i++){
       for (size_t j = 0; j < col; j++){
         if(sched[i][j] != -1){
@@ -108,27 +108,25 @@ bool isValid(DailySchedule& sched, size_t row, size_t col, size_t num_of_workers
           if (counter[sched[i][j]] > maxShifts){
             return false; 
           }
+          if (i == row && i < curr_col){
+            if (sched[row][i] == curr_id) return false; 
+          }
         }
       }
-    }
-    int curr_id = sched[row][curr_col]; 
-    for (size_t i = 0; i < curr_col; i++){
-        if (sched[row][i] == curr_id) return false; 
-
     }
     return true;
 }
 
-void printsched(DailySchedule& sched){
-  int day = 0;
-    for(auto s : sched)
-    {
-        cout << "Day " << day << ": ";
-        for(auto nurse : s)
-        {
-            cout << nurse << " ";
-        }
-        cout << endl;
-        day++;
-    }
-}
+// void printsched(DailySchedule& sched){
+//   int day = 0;
+//     for(auto s : sched)
+//     {
+//         cout << "Day " << day << ": ";
+//         for(auto nurse : s)
+//         {
+//             cout << nurse << " ";
+//         }
+//         cout << endl;
+//         day++;
+//     }
+// }
