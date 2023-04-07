@@ -23,7 +23,6 @@ static const Worker_T INVALID_ID = (unsigned int)-1;
 
 bool solve(const AvailabilityMatrix& avail, const size_t dailyNeed, const size_t maxShifts, DailySchedule& sched, size_t row, size_t col); 
 bool isValid(DailySchedule& sched, size_t row, size_t col, size_t num_of_workers, const size_t maxShifts, size_t curr_col); 
-// void printsched(DailySchedule& sched);
 // Add your implementation of schedule() and other helper functions here
 
 bool schedule(
@@ -116,17 +115,3 @@ bool isValid(DailySchedule& sched, size_t row, size_t col, size_t num_of_workers
     }
     return true;
 }
-
-// void printsched(DailySchedule& sched){
-//   int day = 0;
-//     for(auto s : sched)
-//     {
-//         cout << "Day " << day << ": ";
-//         for(auto nurse : s)
-//         {
-//             cout << nurse << " ";
-//         }
-//         cout << endl;
-//         day++;
-//     }
-// }
