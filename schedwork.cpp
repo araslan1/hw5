@@ -38,10 +38,8 @@ bool schedule(
     sched.clear();
     // Add your code below
     //initialize sched to invalid ids
-    for (size_t i = 0; i < avail.size(); i++){
-        vector<Worker_T> my_vec(dailyNeed, -1); 
-        sched.push_back(my_vec);             
-    }
+    vector<Worker_T> my_vec(dailyNeed, -1); 
+    sched.insert(sched.end(), avail.size(), my_vec);
     return solve(avail, dailyNeed, maxShifts, sched, 0, 0); 
 }
 
@@ -70,6 +68,7 @@ bool solve(
     // iterate through options
     // i < number of of workers
     for (size_t i = 0; i < number_of_workers ; i++){
+                    
         //loop through each worker, if a worker is available on this day add them to schedule
         if (row == n_days){
           return true; 
@@ -82,6 +81,7 @@ bool solve(
                     row += 1; 
                     col = 0; 
                     col_ = 0;
+                    
                 }
     
                 if (solve(avail, dailyNeed, maxShifts, sched, row, col_)){
